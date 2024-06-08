@@ -3,13 +3,13 @@ on:
   workflow_dispatch:
 jobs:
   test_build_umh:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
     - uses: actions/checkout@v3
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v2
       with:
-        vs-version: '[17.0, 18.0)'
+        msbuild-architecture: x64
     - name: build
       run: |
-        msbuild umh/capemon.sln /t:build /p:Configuration=Release;Platform=x64
+        msbuild /m umh/capemon.sln /p:Configuration=Release /p:Platform=x64
